@@ -71,13 +71,13 @@ open class ReactiveBleClient(private val context: Context) : BleClient {
         val filters = services.map { service ->
             ScanFilter.Builder()
                 .setServiceUuid(service)
-                .setLegacy(false)
                 .build()
         }.toTypedArray()
 
         return rxBleClient.scanBleDevices(
             ScanSettings.Builder()
                 .setScanMode(scanMode.toScanSettings())
+                .setLegacy(false)
                 .setCallbackType(ScanSettings.CALLBACK_TYPE_ALL_MATCHES)
                 .setShouldCheckLocationServicesState(requireLocationServicesEnabled)
                 .build(),
